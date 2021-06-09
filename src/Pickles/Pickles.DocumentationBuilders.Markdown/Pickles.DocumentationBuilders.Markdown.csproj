@@ -18,7 +18,6 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
     <Compile Update="Localization.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

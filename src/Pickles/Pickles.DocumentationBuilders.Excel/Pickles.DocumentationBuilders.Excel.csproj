@@ -18,9 +18,6 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Pickles.ObjectModel\Pickles.ObjectModel.csproj" />
   </ItemGroup>
   <ItemGroup>

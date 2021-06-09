@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>PicklesDoc.Pickles.CommandLine</RootNamespace>
     <AssemblyName>Pickles</AssemblyName>
+    <PackageId>Pickles.Commandline</PackageId>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RuntimeIdentifiers>win10-x64;osx.10.11-x64;linux-x64</RuntimeIdentifiers>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Pickles\</SolutionDir>
@@ -34,9 +35,9 @@
     <Version>0.1.0.0</Version>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <Authors>PicklesDoc and contributors</Authors>
-    <PackageIconUrl>https://cdn.rawgit.com/picklesdoc/pickles/master/pickles.png</PackageIconUrl>
+    <PackageIcon>pickles_128.png</PackageIcon>
     <PackageId>Pickles.CommandLine</PackageId>
-    <PackageLicenseUrl>http://apache.org/licenses/LICENSE-2.0.html</PackageLicenseUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>http://www.picklesdoc.com/</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/picklesdoc/pickles/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>SpecificationByExample BDD SpecFlow Gherkin Cucumber SpecByEx LivingDocumentation Documentation</PackageTags>
@@ -45,6 +46,7 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -55,9 +57,6 @@
   <PropertyGroup>
     <StartupObject>PicklesDoc.Pickles.CommandLine.Program</StartupObject>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pickles.ObjectModel\Pickles.ObjectModel.csproj" />
     <ProjectReference Include="..\Pickles\Pickles.csproj" />
@@ -71,5 +70,113 @@
   <ItemGroup>
     <PackageReference Include="NDesk.Options.Core" Version="1.2.5" />
     <PackageReference Include="NLog.Config" Version="4.5.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(OutputPath)\Autofac.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\ClosedXML.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\DocumentFormat.OpenXml.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\ExcelNumberFormat.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\FeatureSwitcher.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\Gherkin.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\Jint.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\MarkdownDeep.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\NDesk.Options.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\Newtonsoft.Json.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\NLog.config">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\NLog.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.DocumentationBuilders.Cucumber.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.DocumentationBuilders.Dhtml.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.DocumentationBuilders.Excel.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.DocumentationBuilders.Html.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.DocumentationBuilders.Json.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.DocumentationBuilders.Markdown.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.DocumentationBuilders.Word.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.Library.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.ObjectModel.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\PicklesDoc.Pickles.TestFrameworks.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\Strike.Jint.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\System.IO.Abstractions.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <Content Include="$(OutputPath)\Utf8Json.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib\$(TargetFramework)</PackagePath>
+    </Content>
+    <None Include="pickles_128.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="pickles_128.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

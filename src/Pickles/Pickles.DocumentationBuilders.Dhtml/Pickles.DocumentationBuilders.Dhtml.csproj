@@ -18,9 +18,6 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="..\pickles.basedhtmlfiles\css\bootstrap.min.css">
       <Link>Resources\css\bootstrap.min.css</Link>
     </EmbeddedResource>
