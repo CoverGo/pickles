@@ -65,7 +65,7 @@ namespace PicklesDoc.Pickles.Extensions
             return path.TrimEnd('\\');
         }
 
-        public static string MakeRelativePath(FileSystemInfoBase from, FileSystemInfoBase to, IFileSystem fileSystem)
+        public static string MakeRelativePath(IFileSystemInfo from, IFileSystemInfo to, IFileSystem fileSystem)
         {
             if (from == null)
             {
@@ -88,13 +88,13 @@ namespace PicklesDoc.Pickles.Extensions
             return fileSystem.Directory.GetFiles(path, wildcardFileName).Where(x => !string.IsNullOrEmpty(x)).ToArray();
         }
 
-        public static IEnumerable<FileInfoBase> GetAllFilesFromPathAndFileNameWithOptionalSemicolonsAndWildCards(string fileFullName, IFileSystem fileSystem)
+        public static IEnumerable<IFileInfo> GetAllFilesFromPathAndFileNameWithOptionalSemicolonsAndWildCards(string fileFullName, IFileSystem fileSystem)
         {
             var files = fileFullName.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             return files.SelectMany(f => GetAllFilesFromPathAndFileNameWithOptionalWildCards(f, fileSystem))
                     .Distinct()
                     .Select(f => fileSystem.FileInfo.FromFileName(f));
         }
-        
+
     }
 }

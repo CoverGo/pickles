@@ -29,7 +29,7 @@ namespace PicklesDoc.Pickles
 {
     // public static class FeatureParsesExtensions
     // {
-    //     public static Feature Parse(this FeatureParser parser, FileInfoBase featureFile)
+    //     public static Feature Parse(this FeatureParser parser, IFileInfo featureFile)
     //     {
     //         var uri
     //     }

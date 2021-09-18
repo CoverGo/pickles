@@ -35,7 +35,7 @@ namespace PicklesDoc.Pickles.Test.Formatters.JSON
         private const string FeaturePath = @"AdvancedFeature.feature";
 
         private FeatureNode featureDirectoryNode;
-        private FileInfoBase featureFileInfo;
+        private IFileInfo featureFileInfo;
         private JsonFeatureWithMetaInfo featureWithMeta;
         private Feature testFeature;
 

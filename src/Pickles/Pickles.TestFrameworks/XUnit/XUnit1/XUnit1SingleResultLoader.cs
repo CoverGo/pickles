@@ -27,7 +27,7 @@ namespace PicklesDoc.Pickles.TestFrameworks.XUnit.XUnit1
     {
         private readonly XDocumentLoader documentLoader = new XDocumentLoader();
 
-        public SingleTestRunBase Load(FileInfoBase fileInfo)
+        public SingleTestRunBase Load(IFileInfo fileInfo)
         {
             return new XUnit1SingleResult(this.documentLoader.Load(fileInfo));
         }

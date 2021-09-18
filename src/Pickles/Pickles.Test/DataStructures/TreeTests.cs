@@ -102,7 +102,7 @@ namespace PicklesDoc.Pickles.Test.DataStructures
 
             public string Name { get; }
 
-            public FileSystemInfoBase OriginalLocation { get; }
+            public IFileSystemInfo OriginalLocation { get; }
 
             public Uri OriginalLocationUrl { get; }
 

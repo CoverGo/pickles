@@ -50,15 +50,15 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Cucumber.UnitTests
 
             var fileSystem = new FileSystem();
             fileSystem.Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            var fileSystemInfoBase = fileSystem.DirectoryInfo.FromDirectoryName(@"./");
+            var IFileSystemInfo = fileSystem.DirectoryInfo.FromDirectoryName(@"./");
             var configuration = new Configuration
             {
-                OutputFolder = fileSystemInfoBase
+                OutputFolder = IFileSystemInfo
             };
             var builder = new CucumberDocumentationBuilder(configuration, fileSystem);
             FeatureParser parser = new FeatureParser(configuration);
             var feature = parser.Parse(new StringReader(featureDescription));
-            var tree =  new Tree(new FeatureNode(fileSystemInfoBase, string.Empty, feature));
+            var tree =  new Tree(new FeatureNode(IFileSystemInfo, string.Empty, feature));
             builder.Build(tree);
         }
     }
