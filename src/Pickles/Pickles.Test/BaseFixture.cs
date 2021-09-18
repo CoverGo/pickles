@@ -104,19 +104,19 @@ namespace PicklesDoc.Pickles.Test
             this.AddFakeFolderAndFiles("EmptyFolderTests", new string[0]);
 
             this.AddFakeFolderAndFiles("FeatureCrawlerTests", new[] { "index.md", "LevelOne.feature", "image.png", "LevelOneIgnoredFeature.feature", "LevelOneRemoveTagsToHide.feature" });
-            this.AddFakeFolderAndFiles(@"FeatureCrawlerTests\SubLevelOne", new[] { "ignorethisfile.ignore", "LevelOneSublevelOne.feature", "LevelOneSublevelTwo.feature" });
-            this.AddFakeFolderAndFiles(@"FeatureCrawlerTests\SubLevelOne\SubLevelTwo", new[] { "LevelOneSublevelOneSubLevelTwo.feature" });
-            this.AddFakeFolderAndFiles(@"FeatureCrawlerTests\SubLevelOne\SubLevelTwo\IgnoreThisDirectory", new[] { "IgnoreThisFile.ignore" });
+            this.AddFakeFolderAndFiles(Path.Combine("FeatureCrawlerTests","SubLevelOne"), new[] { "ignorethisfile.ignore", "LevelOneSublevelOne.feature", "LevelOneSublevelTwo.feature" });
+            this.AddFakeFolderAndFiles(Path.Combine("FeatureCrawlerTests","SubLevelOne","SubLevelTwo"), new[] { "LevelOneSublevelOneSubLevelTwo.feature" });
+            this.AddFakeFolderAndFiles(Path.Combine("FeatureCrawlerTests","SubLevelOne","SubLevelTwo","IgnoreThisDirectory"), new[] { "IgnoreThisFile.ignore" });
 
             this.AddFakeFolderAndFiles(@"OrderingTests", new string[0]);
-            this.AddFakeFolderAndFiles(@"OrderingTests\A", new [] {"a-a.feature", "a-b.feature"});
-            this.AddFakeFolderAndFiles(@"OrderingTests\B", new [] {"b-a.feature", "b-b.feature"});
+            this.AddFakeFolderAndFiles(Path.Combine("OrderingTests","A"), new [] {"a-a.feature", "a-b.feature"});
+            this.AddFakeFolderAndFiles(Path.Combine("OrderingTests","B"), new [] {"b-a.feature", "b-b.feature"});
         }
 
         protected void AddFakeFolderAndFiles(string directoryName, IEnumerable<string> fileNames)
         {
-            string directoryPath = FileSystemPrefix + directoryName + @"\";
-            string resourceIdentifier = ResourcePrefix + directoryName.Replace(@"\", ".") + ".";
+            string directoryPath = FileSystemPrefix + directoryName + Path.DirectorySeparatorChar;
+            string resourceIdentifier = ResourcePrefix + directoryName.Replace(Path.DirectorySeparatorChar, '.') + ".";
 
             this.FileSystem.AddDirectory(directoryPath);
 
