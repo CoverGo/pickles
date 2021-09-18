@@ -19,22 +19,19 @@
 //  --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using System.IO.Abstractions;
 
 namespace PicklesDoc.Pickles.Extensions
 {
     public static class UriExtensions
     {
+        private const string _fileSchema = "file://";
+        private static readonly string _directorySeparator = Path.DirectorySeparatorChar.ToString();
+
         public static Uri ToUri(this IDirectoryInfo instance)
         {
-            string fullName = instance.FullName;
-
-            if (!instance.FullName.EndsWith(@"\"))
-            {
-                fullName = fullName + @"\";
-            }
-
-            return fullName.ToFolderUri();
+            return instance.FullName.ToFolderUri();
         }
 
         public static Uri ToFileUriCombined(this IDirectoryInfo instance, string file, IFileSystem fileSystem)
@@ -42,6 +39,11 @@ namespace PicklesDoc.Pickles.Extensions
             string path = fileSystem.Path.Combine(instance.FullName, file);
 
             return path.ToFileUri();
+        }
+
+        public static Uri GetFileUri(this IDirectoryInfo instance, string file)
+        {
+            return Path.Combine(instance.FullName, file).ToFileUri();
         }
 
         public static Uri ToUri(this IFileSystemInfo instance)
@@ -53,7 +55,7 @@ namespace PicklesDoc.Pickles.Extensions
                 return ToUri(di);
             }
 
-            return ToUri((IFileInfo)instance);
+            return ToFileUri(instance.FullName);
         }
 
         public static Uri ToUri(this IFileInfo instance)
@@ -63,16 +65,22 @@ namespace PicklesDoc.Pickles.Extensions
 
         public static Uri ToFileUri(this string instance)
         {
+            instance = AddFileSchema(instance);
             return new Uri(instance);
+        }
+
+        private static string AddFileSchema(string instance)
+        {
+            if (!instance.StartsWith(_fileSchema))
+                instance = _fileSchema + instance;
+            return instance;
         }
 
         public static Uri ToFolderUri(this string instance)
         {
-            if (!instance.EndsWith(@"\"))
-            {
-                return new Uri(instance + @"\");
-            }
-
+            instance = AddFileSchema(instance);
+            if (!instance.EndsWith(_directorySeparator))
+                instance = instance + _directorySeparator;
             return new Uri(instance);
         }
 

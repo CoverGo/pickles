@@ -1,4 +1,4 @@
-﻿//  --------------------------------------------------------------------------------------------------------------------
+//  --------------------------------------------------------------------------------------------------------------------
 //  <copyright file="BaseFixture.cs" company="PicklesDoc">
 //  Copyright 2011 Jeffrey Cameron
 //  Copyright 2012-present PicklesDoc team and community contributors
@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Reflection;
@@ -43,7 +44,7 @@ namespace PicklesDoc.Pickles.Test
         }
 
         public BaseFixture()
-            : this(Assembly.GetExecutingAssembly().Location)
+            : this(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
         {
         }
 
