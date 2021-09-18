@@ -1,0 +1,226 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hotel-booking;create-a-booking-in-hotel-booking",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Create a booking in Hotel Booking",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Given ",
+            "line": 0,
+            "match": {
+              "location": "GivenAUserWantsToMakeABookingWithTheFollowingDetails"
+            },
+            "name": "a user wants to make a booking with the following details",
+            "result": {
+              "duration": 1921.0900000000001,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "When ",
+            "line": 0,
+            "match": {
+              "location": "WhenTheBookingIsSubmittedByTheUser"
+            },
+            "name": "the booking is submitted by the user",
+            "result": {
+              "duration": 302.38100000000003,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "line": 0,
+            "match": {
+              "location": "ThenTheBookingIsSuccessfullyStored"
+            },
+            "name": "the booking is successfully stored",
+            "result": {
+              "duration": 24.146,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "And ",
+            "line": 0,
+            "match": {
+              "location": "ThenShownToTheUserAsStored"
+            },
+            "name": "shown to the user as stored",
+            "result": {
+              "duration": 9.386000000000001,
+              "error_message": null,
+              "status": "Passed"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "hotel-booking;retrieve-a-booking-in-hotel-booking",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Retrieve a booking in Hotel Booking",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Given ",
+            "line": 0,
+            "match": {
+              "location": "GivenHotelBookingHasExistingBookings"
+            },
+            "name": "Hotel Booking has existing bookings",
+            "result": {
+              "duration": 145.608,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "When ",
+            "line": 0,
+            "match": {
+              "location": "WhenASpecificBookingIsRequestedByTheUser"
+            },
+            "name": "a specific booking is requested by the user",
+            "result": {
+              "duration": 86.473,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "line": 0,
+            "match": {
+              "location": "ThenTheBookingIsShown"
+            },
+            "name": "the booking is shown",
+            "result": {
+              "duration": 10.492,
+              "error_message": null,
+              "status": "Passed"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "hotel-booking;update-a-booking-in-hotel-booking",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Update a booking in Hotel Booking",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Given ",
+            "line": 0,
+            "match": {
+              "location": "GivenHotelBookingHasExistingBookings"
+            },
+            "name": "Hotel Booking has existing bookings",
+            "result": {
+              "duration": 192.65,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "When ",
+            "line": 0,
+            "match": {
+              "location": "WhenASpecificBookingIsUpdatedByTheUser"
+            },
+            "name": "a specific booking is updated by the user",
+            "result": {
+              "duration": 73.881,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "line": 0,
+            "match": {
+              "location": "ThenTheBookingIsShownToBeUpdated"
+            },
+            "name": "the booking is shown to be updated",
+            "result": {
+              "duration": 5.202,
+              "error_message": null,
+              "status": "Passed"
+            }
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "hotel-booking;delete-a-booking-in-hotel-booking",
+        "keyword": "Scenario",
+        "line": 22,
+        "name": "Delete a booking in Hotel Booking",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Given ",
+            "line": 0,
+            "match": {
+              "location": "GivenHotelBookingHasExistingBookings"
+            },
+            "name": "Hotel Booking has existing bookings",
+            "result": {
+              "duration": 172.20000000000002,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "When ",
+            "line": 0,
+            "match": {
+              "location": "WhenASpecificBookingIsDeletedByTheUser"
+            },
+            "name": "a specific booking is deleted by the user",
+            "result": {
+              "duration": 63.35,
+              "error_message": null,
+              "status": "Passed"
+            }
+          },
+          {
+            "keyword": "Then ",
+            "line": 0,
+            "match": {
+              "location": "ThenTheBookingIsRemoved"
+            },
+            "name": "the booking is removed",
+            "result": {
+              "duration": 52.589000000000006,
+              "error_message": null,
+              "status": "Passed"
+            }
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "hotel-booking",
+    "keyword": "Feature",
+    "line": 1,
+    "tags": [],
+    "name": "Hotel Booking",
+    "uri": "Features/HotelBookingTests.feature"
+  }
+]
