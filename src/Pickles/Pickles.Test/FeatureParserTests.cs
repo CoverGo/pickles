@@ -37,5 +37,22 @@ namespace PicklesDoc.Pickles.Test
             Check.ThatCode(() => parser.Parse(reader)).Throws<FeatureParseException>()
                 .WithMessage("Unable to parse feature");
         }
+
+        [Test]
+        public void Parse_WithUri_SetsUriInFeature()
+        {
+            var parser = new FeatureParser(Configuration);
+            var featureText = @"
+              Feature: Feature parser uri populating
+                Scenario: External uri is presented
+                  Given a feature with external uri
+                  When I parse the feature and pass uri
+                  Then parsed feature has this uri set in Uri property
+            ";
+            var reader = new System.IO.StringReader(featureText);
+            var uri = "TestUri";
+            var feature = parser.Parse(reader, uri);
+            Check.That(feature.Uri).Equals(uri);
+        }
     }
 }

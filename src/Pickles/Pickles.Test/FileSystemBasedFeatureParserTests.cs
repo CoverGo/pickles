@@ -38,6 +38,22 @@ namespace PicklesDoc.Pickles.Test
                 .WithMessage(@"There was an error parsing the feature file here: c:\temp\featurefile.feature" +
                              Environment.NewLine + @"Errormessage was: 'Unable to parse feature'");
         }
+        [Test]
+        public void Parse_FeatureFile_Sets_Uri_from_file_path()
+        {
+            var featureText = @"
+              Feature: Feature parser uri populating
+                Scenario: External uri is presented
+                  Given a feature with external uri
+                  When I parse the feature and pass uri
+                  Then parsed feature has this uri set in Uri property
+            ";
+            var featureFilePath = @"c:\temp\featurefile.feature";
+            FileSystem.AddFile(featureFilePath, new MockFileData(featureText));
+            var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration), FileSystem);
+            var feature = parser.Parse(featureFilePath);
+            Check.That(feature.Uri).Equals("temp/featurefile.feature");
+        }
 
     }
 }
