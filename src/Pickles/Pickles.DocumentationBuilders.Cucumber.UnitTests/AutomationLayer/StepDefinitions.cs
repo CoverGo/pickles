@@ -1,4 +1,4 @@
-﻿//  --------------------------------------------------------------------------------------------------------------------
+//  --------------------------------------------------------------------------------------------------------------------
 //  <copyright file="StepDefinitions.cs" company="PicklesDoc">
 //  Copyright 2017 Dmitry Grekov
 //  Copyright 2012-present PicklesDoc team and community contributors
@@ -29,48 +29,59 @@ using PicklesDoc.Pickles.Test;
 using PicklesDoc.Pickles.DataStructures;
 using PicklesDoc.Pickles;
 using System.IO;
+using System.IO.Abstractions;
+using System.Reflection;
 using PicklesDoc.Pickles.DirectoryCrawler;
 using Autofac;
+using FluentAssertions;
 using NFluent;
 
 namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
 {
     [Binding]
     [Scope(Tag = "cucumber")]
-    public sealed class StepDefinitions : BaseFixture /* God object antipattern */
+    public sealed class StepDefinitions
     {
         private Tree nodes;
+        private readonly string _outputDirectory = "output/Pickles.DocumentationBuilders.Cucumber.UnitTests";
+        public Configuration Configuration { get; }
+        private  FileSystem FileSystem { get; } = new FileSystem();
+        private  CucumberDocumentationBuilder DocumentationBuilder { get; }
 
+        public StepDefinitions()
+        {
+            this.FileSystem.Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            this.FileSystem.Directory.CreateDirectory(_outputDirectory);
+            this.Configuration = new Configuration
+            {
+                ExcludeTags = "exclude-tag", HideTags = "TagsToHideFeature;TagsToHideScenario",
+                OutputFolder = this.FileSystem.DirectoryInfo.FromDirectoryName(@"./")
+            };
+            DocumentationBuilder = new CucumberDocumentationBuilder(this.Configuration, this.FileSystem);
+        }
         [Given("I have this feature description")]
         public void IHaveThisFeatureDescription(string featureDescription)
         {
-            var configuration = this.Configuration;
-            FeatureParser parser = new FeatureParser(configuration);
+            FeatureParser parser = new FeatureParser(Configuration);
 
             var feature = parser.Parse(new StringReader(featureDescription));
-
-            this.nodes = new Tree(new FeatureNode(this.FileSystem.DirectoryInfo.FromDirectoryName(@"c:\output\"), string.Empty, feature));
+            this.nodes = new Tree(new FeatureNode(this.FileSystem.DirectoryInfo.FromDirectoryName(_outputDirectory), string.Empty, feature));
         }
 
         [When(@"I generate the documentation")]
         public void WhenIGenerateTheJsonDocumentation()
         {
             var configuration = this.Configuration;
-            configuration.OutputFolder = this.FileSystem.DirectoryInfo.FromDirectoryName(@"c:\output\");
-            var jsonDocumentationBuilder = this.Container.Resolve<CucumberDocumentationBuilder>();
+            configuration.OutputFolder = this.FileSystem.DirectoryInfo.FromDirectoryName(_outputDirectory);
 
-            jsonDocumentationBuilder.Build(this.nodes);
+            DocumentationBuilder.Build(this.nodes);
         }
 
         [Then("the JSON file should contain")]
         public void ThenTheResultShouldBe(string expectedResult)
         {
-            var actualResult = this.FileSystem.File.ReadAllText(@"c:\output\cucumberResult.json");
-
-            //standardize newlines across various environments
-            actualResult = actualResult.Replace("\r\n", "\n");
-            expectedResult = expectedResult.Replace("\r\n", "\n");
-            Check.That(actualResult).Contains(expectedResult);
+            var actualResult = this.FileSystem.File.ReadAllText(Path.Combine(_outputDirectory,"cucumberResult.json"));
+            actualResult.Should().Contain(expectedResult);
         }
     }
 }

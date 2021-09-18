@@ -24,7 +24,7 @@ Scenario: A simple feature
   {
     "keyword": "Feature",
     "name": "Clearing Screen",
-    "uri": "FormattingAFeature.feature"
+    "uri": "FormattingAFeature.feature",
     "tags": [],
     "line": 1,
     "elements": [
