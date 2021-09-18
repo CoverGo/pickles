@@ -254,6 +254,7 @@ Scenario: Scenario with large data table
   {
     ""keyword"": ""Feature"",
     ""name"": ""Interactive DHTML View"",
+    ""uri"": ""FormattingAFeature.feature"",
     ""tags"": [],
     ""line"": 1,
     ""elements"": [

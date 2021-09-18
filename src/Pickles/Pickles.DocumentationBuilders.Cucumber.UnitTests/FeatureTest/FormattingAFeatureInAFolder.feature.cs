@@ -103,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
-    testRunner.Given("I have this feature description placed in a folder \"FeatureTest\"", @"Feature: Clearing Screen
+    testRunner.Given("I have this feature description placed in a folder \'FeatureTest\'", @"Feature: Clearing Screen
     In order to restart a new set of calculations
     As a math idiot
     I want to be able to clear the screen
@@ -123,7 +123,7 @@ Scenario: Clear the screen
   {
     ""keyword"": ""Feature"",
     ""name"": ""Clearing Screen"",
-    ""uri"": ""FeatureTest/FormattingAFeature.feature""
+    ""uri"": ""FeatureTest/FormattingAFeature.feature"",
     ""tags"": [],
     ""line"": 1,
     ""elements"": [

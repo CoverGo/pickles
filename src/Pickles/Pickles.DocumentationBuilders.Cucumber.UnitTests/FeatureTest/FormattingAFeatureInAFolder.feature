@@ -3,7 +3,7 @@
 @cucumber
 Scenario: A simple feature in a folder
 
-    Given I have this feature description placed in a folder "FeatureTest"
+    Given I have this feature description placed in a folder 'FeatureTest'
         """
         Feature: Clearing Screen
             In order to restart a new set of calculations
@@ -24,7 +24,7 @@ Scenario: A simple feature in a folder
   {
     "keyword": "Feature",
     "name": "Clearing Screen",
-    "uri": "FeatureTest/FormattingAFeature.feature"
+    "uri": "FeatureTest/FormattingAFeature.feature",
     "tags": [],
     "line": 1,
     "elements": [

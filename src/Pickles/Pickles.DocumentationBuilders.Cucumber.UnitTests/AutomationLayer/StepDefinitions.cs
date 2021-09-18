@@ -59,6 +59,13 @@ namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
             };
             DocumentationBuilder = new CucumberDocumentationBuilder(this.Configuration, this.FileSystem);
         }
+
+        [Given("I have this feature description placed in a folder '(.*)'")]
+        public void IHaveThisFeatureDescriptionInAFolder(string folder, string featureDescription)
+        {
+            IHaveThisFeatureDescription(featureDescription);
+        }
+
         [Given("I have this feature description")]
         public void IHaveThisFeatureDescription(string featureDescription)
         {
