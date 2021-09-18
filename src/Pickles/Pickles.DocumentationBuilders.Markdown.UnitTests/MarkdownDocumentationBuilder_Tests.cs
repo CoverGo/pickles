@@ -24,6 +24,7 @@ using PicklesDoc.Pickles.DataStructures;
 using PicklesDoc.Pickles.DirectoryCrawler;
 using PicklesDoc.Pickles.ObjectModel;
 using System;
+using System.IO;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Reflection;
@@ -58,8 +59,8 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
         [Test]
         public void When_I_Build_Documentation_A_File_Is_Created()
         {
-            var outputFolder = @"c:\output";
-            var defaultOutputFile = @"c:\output\features.md";
+            var outputFolder = "output";
+            var defaultOutputFile = Path.Combine("output","features.md");
 
             var container = BuildContainer();
             var configuration = container.Resolve<IConfiguration>();
@@ -75,7 +76,7 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
         [Test]
         public void When_I_Build_Documentation_Icon_Files_Are_Created()
         {
-            var outputFolder = @"c:\output";
+            var outputFolder = "output";
 
             var container = BuildContainer();
             var configuration = container.Resolve<IConfiguration>();
@@ -85,16 +86,16 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
 
             markdownDocumentationBuilder.Build(null);
 
-            Assert.IsTrue(fileSystem.FileExists(@"c:\output\pass.png"));
-            Assert.IsTrue(fileSystem.FileExists(@"c:\output\fail.png"));
-            Assert.IsTrue(fileSystem.FileExists(@"c:\output\inconclusive.png"));
+            Assert.IsTrue(fileSystem.FileExists(Path.Combine("output","pass.png")));
+            Assert.IsTrue(fileSystem.FileExists(Path.Combine("output","fail.png")));
+            Assert.IsTrue(fileSystem.FileExists(Path.Combine("output","inconclusive.png")));
         }
 
         [Test]
         public void With_A_Null_Tree_The_Output_Has_Default_Content()
         {
-            var outputFolder = @"c:\output";
-            var defaultOutputFile = @"c:\output\features.md";
+            var outputFolder = "output";
+            var defaultOutputFile = Path.Combine("output","features.md");
             var expectedFile = new string[]
             {
                 "# Features",
@@ -121,8 +122,8 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
         [Test]
         public void With_A_Simple_Feature_The_Output_Has_Default_Content()
         {
-            var outputFolder = @"c:\output";
-            var defaultOutputFile = @"c:\output\features.md";
+            var outputFolder = "output";
+            var defaultOutputFile = Path.Combine("output", "features.md");
             var expectedFile = new string[]
             {
                 "# Features",
@@ -142,7 +143,7 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
             var simpleFeature = new Feature();
             simpleFeature.Name = "Simple Feature";
             var relPath = "fakedir";
-            var location = fileSystem.FileInfo.FromFileName(@"c:\");
+            var location = fileSystem.FileInfo.FromFileName(fileSystem.Directory.GetCurrentDirectory());
             var newNode = new FeatureNode(location, relPath, simpleFeature);
             var featureTree = new Tree(new FolderNode(location, relPath));
             featureTree.Add(newNode);

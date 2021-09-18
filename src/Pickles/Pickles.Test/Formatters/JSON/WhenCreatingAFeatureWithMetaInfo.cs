@@ -19,6 +19,7 @@
 //  --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using System.IO.Abstractions;
 using NFluent;
 using NUnit.Framework;
@@ -31,7 +32,7 @@ namespace PicklesDoc.Pickles.Test.Formatters.JSON
     public class WhenCreatingAFeatureWithMetaInfo : BaseFixture
     {
         private const string RelativePath = @"AcceptanceTest";
-        private const string RootPath = FileSystemPrefix + @"AcceptanceTest";
+        private string RootPath { get; }
         private const string FeaturePath = @"AdvancedFeature.feature";
 
         private FeatureNode featureDirectoryNode;
@@ -39,6 +40,10 @@ namespace PicklesDoc.Pickles.Test.Formatters.JSON
         private JsonFeatureWithMetaInfo featureWithMeta;
         private Feature testFeature;
 
+        public WhenCreatingAFeatureWithMetaInfo()
+        {
+            RootPath = Path.Combine(FileSystemPrefix,"AcceptanceTest");
+        }
         public void Setup()
         {
             this.testFeature = new Feature { Name = "Test" };

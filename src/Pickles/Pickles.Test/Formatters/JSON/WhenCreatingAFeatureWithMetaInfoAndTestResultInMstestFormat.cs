@@ -40,10 +40,10 @@ namespace PicklesDoc.Pickles.Test.Formatters.JSON
     {
         public string Setup()
         {
-            const string OutputDirectoryName = FileSystemPrefix + @"JSONFeatureOutput";
-            var rootPath = FileSystem.DirectoryInfo.FromDirectoryName(FileSystemPrefix + Path.Combine("JSON","Features"));
+            string OutputDirectoryName = Path.Combine(FileSystemPrefix,"JSONFeatureOutput");
+            var rootPath = FileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(FileSystemPrefix,"JSON","Features"));
 
-            var TestResultFilePath = FileSystemPrefix + Path.Combine("JSON","results-example-failing-and-pasing-mstest.trx");
+            var TestResultFilePath =  Path.Combine(FileSystemPrefix,"JSON","results-example-failing-and-pasing-mstest.trx");
 
             string filePath = FileSystem.Path.Combine(OutputDirectoryName, JsonDocumentationBuilder.JsonFileName);
 

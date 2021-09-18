@@ -33,7 +33,7 @@ namespace PicklesDoc.Pickles.Test
 {
     public class BaseFixture
     {
-        protected const string FileSystemPrefix = @"c:\temp\FakeFolderStructures\";
+        protected readonly string FileSystemPrefix;
         protected const string ResourcePrefix = "PicklesDoc.Pickles.Test.FakeFolderStructures.";
         private IContainer container;
         private readonly string currentDirectory;
@@ -41,6 +41,7 @@ namespace PicklesDoc.Pickles.Test
         public BaseFixture(string currentDirectory)
         {
             this.currentDirectory = currentDirectory;
+            FileSystemPrefix = Path.Combine(currentDirectory,"temp","FakeFolderStructures");
         }
 
         public BaseFixture()
@@ -115,7 +116,7 @@ namespace PicklesDoc.Pickles.Test
 
         protected void AddFakeFolderAndFiles(string directoryName, IEnumerable<string> fileNames)
         {
-            string directoryPath = FileSystemPrefix + directoryName + Path.DirectorySeparatorChar;
+            string directoryPath = Path.Combine(FileSystemPrefix, directoryName);
             string resourceIdentifier = ResourcePrefix + directoryName.Replace(Path.DirectorySeparatorChar, '.') + ".";
 
             this.FileSystem.AddDirectory(directoryPath);
@@ -123,7 +124,7 @@ namespace PicklesDoc.Pickles.Test
             foreach (var fileName in fileNames)
             {
                 this.FileSystem.AddFile(
-                    directoryPath + fileName,
+                    Path.Combine(directoryPath,fileName),
                     RetrieveContentOfFileFromResources(resourceIdentifier + fileName));
             }
         }

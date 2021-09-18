@@ -19,6 +19,7 @@
 //  --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using NFluent;
 using NUnit.Framework;
@@ -31,11 +32,13 @@ namespace PicklesDoc.Pickles.Test
         [Test]
         public void Parse_InvalidFeatureFile_ThrowsFeatureParseExceptionWithFilename()
         {
-            FileSystem.AddFile(@"c:\temp\featurefile.feature", new MockFileData("Invalid feature file"));
+            var filePath = Path.Combine("temp","featurefile.feature");
+            FileSystem.AddFile(filePath, new MockFileData("Invalid feature file"));
+            var fileInfo=FileSystem.FileInfo.FromFileName(filePath);
             var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration), FileSystem);
 
-            Check.ThatCode(() => parser.Parse(@"c:\temp\featurefile.feature")).Throws<FeatureParseException>()
-                .WithMessage(@"There was an error parsing the feature file here: c:\temp\featurefile.feature" +
+            Check.ThatCode(() => parser.Parse(filePath)).Throws<FeatureParseException>()
+                .WithMessage(@"There was an error parsing the feature file here: "+ fileInfo.FullName +
                              Environment.NewLine + @"Errormessage was: 'Unable to parse feature'");
         }
         [Test]
@@ -48,11 +51,12 @@ namespace PicklesDoc.Pickles.Test
                   When I parse the feature and pass uri
                   Then parsed feature has this uri set in Uri property
             ";
-            var featureFilePath = @"c:\temp\featurefile.feature";
+            var featureFilePath = Path.Combine("temp","featurefile.feature");
             FileSystem.AddFile(featureFilePath, new MockFileData(featureText));
+            //var fileInfo = FileSystem.FileInfo()
             var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration), FileSystem);
             var feature = parser.Parse(featureFilePath);
-            Check.That(feature.Uri).Equals("temp/featurefile.feature");
+            Check.That(feature.Uri).Equals(featureFilePath);
         }
 
     }

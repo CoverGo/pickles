@@ -41,7 +41,12 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Word.UnitTests
     {
         private WordDocumentationBuilder builder;
         private Tree features;
-        private const string RootPath = FileSystemPrefix + @"OrderingTests";
+        private string RootPath { get; }
+
+        public WhenBuildingWordDocuments()
+        {
+            this.RootPath = Path.Combine(FileSystemPrefix,"OrderingTests");
+        }
 
         [SetUp]
         public void Setup()

@@ -36,30 +36,31 @@ namespace PicklesDoc.Pickles.Test
         [Test]
         public void Create_InvalidFeatureFile_AddsEntryToReport()
         {
-            FileSystem.AddFile(@"c:\test.feature", new MockFileData("Invalid feature file"));
+            FileSystem.AddFile(@"test.feature", new MockFileData("Invalid feature file"));
 
             var featureNodeFactory = this.CreateFeatureNodeFactory();
 
             var report = new ParsingReport();
 
-            featureNodeFactory.Create(null, FileSystem.FileInfo.FromFileName(@"c:\test.feature"), report);
+            featureNodeFactory.Create(null, FileSystem.FileInfo.FromFileName(@"test.feature"), report);
 
-            Check.That(report.First()).Contains(@"c:\test.feature");
+            Check.That(report.First()).Contains(@"test.feature");
         }
 
         [Test]
         public void Create_MarkdownParsingError_AddsEntryToReport()
         {
-            FileSystem.AddFile(@"c:\test.md", new MockFileData("* Some Markdown text"));
+            FileSystem.AddFile(@"test.md", new MockFileData("* Some Markdown text"));
 
             var featureNodeFactory = this.CreateFeatureNodeFactory(new MockMarkdownProvider());
 
             var report = new ParsingReport();
 
-            featureNodeFactory.Create(null, FileSystem.FileInfo.FromFileName(@"c:\test.md"), report);
+            var fileInfo = FileSystem.FileInfo.FromFileName(@"test.md");
+            featureNodeFactory.Create(null, fileInfo, report);
 
             Check.That(report.Count).Equals(1);
-            Check.That(report.First()).Equals(@"Error parsing the Markdown file located at c:\test.md. Error: Error parsing text.");
+            Check.That(report.First()).Equals($"Error parsing the Markdown file located at {fileInfo.FullName}. Error: Error parsing text.");
         }
 
         private FeatureNodeFactory CreateFeatureNodeFactory()
