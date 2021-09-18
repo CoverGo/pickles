@@ -1,4 +1,4 @@
-﻿//  --------------------------------------------------------------------------------------------------------------------
+//  --------------------------------------------------------------------------------------------------------------------
 //  <copyright file="PathExtensions.cs" company="PicklesDoc">
 //  Copyright 2011 Jeffrey Cameron
 //  Copyright 2012-present PicklesDoc team and community contributors
@@ -20,11 +20,22 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
 
 namespace PicklesDoc.Pickles.Extensions
 {
+    public static class FileSystemExtensions
+    {
+        public static Uri GetUri(this IFileSystem fileSystem, string path)
+        {
+            if(fileSystem.Directory.Exists(path))
+                return fileSystem.DirectoryInfo.FromDirectoryName(path).FullName.ToFolderUri();
+            return fileSystem.FileInfo.FromFileName(path).FullName.ToFileUri();
+        }
+    }
+
     public static class PathExtensions
     {
         public static string MakeRelativePath(string from, string to, IFileSystem fileSystem)
@@ -39,31 +50,15 @@ namespace PicklesDoc.Pickles.Extensions
                 throw new ArgumentNullException("to");
             }
 
-            string fromString = AddTrailingSlashToDirectoriesForUriMethods(from, fileSystem);
-            string toString = AddTrailingSlashToDirectoriesForUriMethods(to, fileSystem);
-
-            var fromUri = new Uri(fromString);
-            var toUri = new Uri(toString);
+            var fromUri = fileSystem.GetUri(from);
+            var toUri = fileSystem.GetUri(to);
 
             Uri relativeUri = fromUri.MakeRelativeUri(toUri);
             string relativePath = Uri.UnescapeDataString(relativeUri.ToString());
 
-            return relativePath.Replace('/', fileSystem.Path.DirectorySeparatorChar);
+            return relativePath.Replace(Uri.SchemeDelimiter, fileSystem.Path.DirectorySeparatorChar.ToString());
         }
 
-        private static string AddTrailingSlashToDirectoriesForUriMethods(string path, IFileSystem fileSystem)
-        {
-            // Uri class treats paths that end in \ as directories, and without \ as files.
-            // So if its a file then we need to append the \ to make the Uri class recognize it as a directory
-            path = RemoveEndSlashSoWeDoNotHaveTwoIfThisIsADirectory(path);
-
-            return fileSystem.Directory.Exists(path) ? path + @"\" : path;
-        }
-
-        private static string RemoveEndSlashSoWeDoNotHaveTwoIfThisIsADirectory(string path)
-        {
-            return path.TrimEnd('\\');
-        }
 
         public static string MakeRelativePath(IFileSystemInfo from, IFileSystemInfo to, IFileSystem fileSystem)
         {
