@@ -41,6 +41,11 @@ namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
     {
         private Tree nodes;
 
+        [Given(@"I have this feature description placed in a folder '(.*)'")]
+        public void GivenIHaveThisFeatureDescriptionPlacedInAFolder(string featureFolder, string multilineText)
+        {
+            IHaveThisFeatureDescription(multilineText);
+        }
         [Given("I have this feature description")]
         public void IHaveThisFeatureDescription(string featureDescription)
         {

@@ -51,20 +51,23 @@ namespace PicklesDoc.Pickles
             {
                 var specificEncoderReader = new StreamReader(fileStream, encoding);
 
-                    try
+                try
+                {
+                    feature = this.parser.Parse(specificEncoderReader);
+                    if (feature != null)
                     {
-                        feature = this.parser.Parse(specificEncoderReader);
-                        feature.Uri = fileInfo.FullName.ToFileUri();
+                        feature.Uri = fileInfo.FullName?.ToFileUri();
                         feature.Root = this.fileSystem.Directory.GetCurrentDirectory().ToFolderUri();
                     }
-                    catch (FeatureParseException e)
-                    {
-                        string message =
-                            $"There was an error parsing the feature file here: {this.fileSystem.Path.GetFullPath(filename)}" +
-                            Environment.NewLine +
-                            $"Errormessage was: '{e.Message}'";
-                        throw new FeatureParseException(message, e);
-                    }
+                }
+                catch (FeatureParseException e)
+                {
+                    string message =
+                        $"There was an error parsing the feature file here: {this.fileSystem.Path.GetFullPath(filename)}" +
+                        Environment.NewLine +
+                        $"Errormessage was: '{e.Message}'";
+                    throw new FeatureParseException(message, e);
+                }
             }
 
             return feature;
