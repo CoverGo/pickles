@@ -79,7 +79,7 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Cucumber
             {
                 keyword = "Feature",
                 name = f.Name,
-                uri = "FormattingAFeature.feature",
+                uri = f.Uri?.MakeRelativeUri(f.Root).ToString(),
                 tags = f.Tags.Select(t => new { name = t }),
                 line = 1,
                 elements = f.FeatureElements.Select(fe =>

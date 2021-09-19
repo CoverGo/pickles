@@ -24,7 +24,6 @@ Scenario: A simple feature
   {
     "keyword": "Feature",
     "name": "Clearing Screen",
-    "uri": "FormattingAFeature.feature",
     "tags": [],
     "line": 1,
     "elements": [
@@ -126,7 +125,6 @@ Scenario: A feature with a table
   {
     "keyword": "Feature",
     "name": "Interactive DHTML View",
-    "uri": "FormattingAFeature.feature",
     "tags": [],
     "line": 1,
     "elements": [

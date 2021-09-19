@@ -3,7 +3,7 @@
 @cucumber
 Scenario: A simple feature in a folder
 
-    Given I have this feature description placed in a folder 'FeatureTest'
+    Given I have this feature description placed in a folder 'FeatureTest' in a file 'FormattingAFeatureInAFolder.feature'
         """
         Feature: Clearing Screen
             In order to restart a new set of calculations

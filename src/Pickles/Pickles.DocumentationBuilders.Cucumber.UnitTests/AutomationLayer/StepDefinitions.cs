@@ -29,6 +29,7 @@ using PicklesDoc.Pickles.Test;
 using PicklesDoc.Pickles.DataStructures;
 using PicklesDoc.Pickles;
 using System.IO;
+using System.IO.Abstractions;
 using PicklesDoc.Pickles.DirectoryCrawler;
 using Autofac;
 using NFluent;
@@ -41,10 +42,23 @@ namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
     {
         private Tree nodes;
 
-        [Given(@"I have this feature description placed in a folder '(.*)'")]
-        public void GivenIHaveThisFeatureDescriptionPlacedInAFolder(string featureFolder, string multilineText)
+        [Given(@"I have this feature description placed in a folder '(.*)' in a file '(.*)'")]
+        public void GivenIHaveThisFeatureDescriptionPlacedInAFolder(string featureFolder, string featureFile, string multilineText)
         {
-            IHaveThisFeatureDescription(multilineText);
+            var directoryInfo = FileSystem.DirectoryInfo.FromDirectoryName(featureFolder);
+            directoryInfo.Create();
+            var fileName = Path.Combine(featureFolder,featureFile);
+            using var writer = FileSystem.FileInfo.FromFileName(fileName).CreateText();
+            {
+                writer.Write(multilineText);
+                writer.Close();
+            }
+
+            var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration),FileSystem);
+
+            var feature = parser.Parse(fileName);
+
+            this.nodes = new Tree(new FeatureNode(this.FileSystem.DirectoryInfo.FromDirectoryName(@"output"), string.Empty, feature));
         }
         [Given("I have this feature description")]
         public void IHaveThisFeatureDescription(string featureDescription)

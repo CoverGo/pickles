@@ -103,7 +103,8 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
-    testRunner.Given("I have this feature description placed in a folder \'FeatureTest\'", @"Feature: Clearing Screen
+    testRunner.Given("I have this feature description placed in a folder \'FeatureTest\' in a file \'Forma" +
+                        "ttingAFeatureInAFolder.feature\'", @"Feature: Clearing Screen
     In order to restart a new set of calculations
     As a math idiot
     I want to be able to clear the screen

@@ -123,7 +123,6 @@ Scenario: Clear the screen
   {
     ""keyword"": ""Feature"",
     ""name"": ""Clearing Screen"",
-    ""uri"": ""FormattingAFeature.feature"",
     ""tags"": [],
     ""line"": 1,
     ""elements"": [
@@ -191,7 +190,7 @@ Scenario: Clear the screen
                     "cucumber"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A feature with a table", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 84
+#line 83
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -211,7 +210,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 86
+#line 85
     testRunner.Given("I have this feature description", @"Feature: Interactive DHTML View
     In order to increase stakeholder engagement with pickled specs
     As a SpecFlow evangelist
@@ -246,15 +245,14 @@ Scenario: Scenario with large data table
     When I click on the table heading
     Then the table body should collapse", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 122
+#line 121
     testRunner.When("I generate the documentation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 123
+#line 122
     testRunner.Then("the JSON file should contain", @"[
   {
     ""keyword"": ""Feature"",
     ""name"": ""Interactive DHTML View"",
-    ""uri"": ""FormattingAFeature.feature"",
     ""tags"": [],
     ""line"": 1,
     ""elements"": [
