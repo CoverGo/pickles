@@ -18,6 +18,7 @@
 //  </copyright>
 //  --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Abstractions;
@@ -119,13 +120,26 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Cucumber
         private static string DetermineStatus(IFeatureElement fe)
         {
             var testResult = fe.Result;
-
-            if (testResult == TestResult.NotProvided)
+            CucumberTestResults cucumberTestResult;
+            switch (testResult)
             {
-                testResult = TestResult.Inconclusive;
+                case TestResult.Inconclusive:
+                    cucumberTestResult = CucumberTestResults.Ambiguous;
+                    break;
+                case TestResult.Failed:
+                    cucumberTestResult = CucumberTestResults.Failed;
+                    break;
+                case TestResult.Passed:
+                    cucumberTestResult = CucumberTestResults.Passed;
+                    break;
+                case TestResult.NotProvided:
+                    cucumberTestResult = CucumberTestResults.Undefined;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("Unknown test result "+testResult);
             }
 
-            return testResult.ToString().ToLowerInvariant();
+            return Enum.GetName(typeof(CucumberTestResults),cucumberTestResult);
         }
 
         private void CreateFile(string outputFolderName, string jsonToWrite)
