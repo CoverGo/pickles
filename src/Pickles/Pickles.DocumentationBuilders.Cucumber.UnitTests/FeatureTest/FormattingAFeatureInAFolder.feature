@@ -24,7 +24,7 @@ Scenario: A simple feature in a folder
   {
     "keyword": "Feature",
     "name": "Clearing Screen",
-    "uri": "FeatureTest/FormattingAFeature.feature",
+    "uri": "FeatureTest/FormattingAFeatureInAFolder.feature",
     "tags": [],
     "line": 1,
     "elements": [

@@ -124,7 +124,7 @@ Scenario: Clear the screen
   {
     ""keyword"": ""Feature"",
     ""name"": ""Clearing Screen"",
-    ""uri"": ""FeatureTest/FormattingAFeature.feature"",
+    ""uri"": ""FeatureTest/FormattingAFeatureInAFolder.feature"",
     ""tags"": [],
     ""line"": 1,
     ""elements"": [
