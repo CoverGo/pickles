@@ -22,6 +22,7 @@ using System;
 using System.IO;
 using System.IO.Abstractions;
 using System.Text;
+using PicklesDoc.Pickles.Extensions;
 using PicklesDoc.Pickles.ObjectModel;
 
 namespace PicklesDoc.Pickles
@@ -45,13 +46,16 @@ namespace PicklesDoc.Pickles
         {
             Feature feature = null;
             var encoding = this.encodingDetector.GetEncoding(filename);
-            using (var fileStream = this.fileSystem.FileInfo.FromFileName(filename).OpenRead())
+            var fileInfo = this.fileSystem.FileInfo.FromFileName(filename);
+            using (var fileStream = fileInfo.OpenRead())
             {
                 var specificEncoderReader = new StreamReader(fileStream, encoding);
-                
+
                     try
                     {
                         feature = this.parser.Parse(specificEncoderReader);
+                        feature.Uri = fileInfo.FullName.ToFileUri();
+                        feature.Root = this.fileSystem.Directory.GetCurrentDirectory().ToFolderUri();
                     }
                     catch (FeatureParseException e)
                     {
@@ -61,11 +65,6 @@ namespace PicklesDoc.Pickles
                             $"Errormessage was: '{e.Message}'";
                         throw new FeatureParseException(message, e);
                     }
-                    //specificEncoderReader.Close();
-
-                
-
-                //fileStream.Close();
             }
 
             return feature;

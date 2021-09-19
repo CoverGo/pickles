@@ -1,4 +1,4 @@
-﻿//  --------------------------------------------------------------------------------------------------------------------
+//  --------------------------------------------------------------------------------------------------------------------
 //  <copyright file="Feature.cs" company="PicklesDoc">
 //  Copyright 2011 Jeffrey Cameron
 //  Copyright 2012-present PicklesDoc team and community contributors
@@ -18,6 +18,7 @@
 //  </copyright>
 //  --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 
 namespace PicklesDoc.Pickles.ObjectModel
@@ -34,7 +35,9 @@ namespace PicklesDoc.Pickles.ObjectModel
 
         public string Name { get; set; }
 
-        public string Uri { get; set; }
+        public Uri Uri { get; set; }
+        
+        public Uri Root { get; set; }
 
         public string Description { get; set; }
 

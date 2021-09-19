@@ -18,6 +18,7 @@
 //  </copyright>
 //  --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.IO.Abstractions;
 using Gherkin;
@@ -27,13 +28,6 @@ using TextReader = System.IO.TextReader;
 
 namespace PicklesDoc.Pickles
 {
-    // public static class FeatureParsesExtensions
-    // {
-    //     public static Feature Parse(this FeatureParser parser, IFileInfo featureFile)
-    //     {
-    //         var uri
-    //     }
-    // }
     public class FeatureParser
     {
         private readonly IConfiguration configuration;
@@ -49,7 +43,7 @@ namespace PicklesDoc.Pickles
             this.configuration = configuration;
         }
 
-        public Feature Parse(TextReader featureFileReader, string uri=null)
+        public Feature Parse(TextReader featureFileReader)
         {
             var language = this.DetermineLanguage();
             var gherkinParser = new Gherkin.Parser();
@@ -63,7 +57,7 @@ namespace PicklesDoc.Pickles
 
                 var languageServices = this.languageServicesRegistry.GetLanguageServicesForLanguage(gherkinDocument.Feature.Language);
                 Feature result = new Mapper(this.configuration, languageServices).MapToFeature(gherkinDocument);
-                result.Uri = uri ?? string.Empty;
+
                 result = new FeatureFilter(result, this.configuration.ExcludeTags).ExcludeScenariosByTags();
 
                 if (result != null)

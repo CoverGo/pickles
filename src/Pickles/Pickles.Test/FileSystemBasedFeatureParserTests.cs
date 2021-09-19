@@ -23,6 +23,7 @@ using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using NFluent;
 using NUnit.Framework;
+using PicklesDoc.Pickles.Extensions;
 
 namespace PicklesDoc.Pickles.Test
 {
@@ -53,10 +54,10 @@ namespace PicklesDoc.Pickles.Test
             ";
             var featureFilePath = Path.Combine("temp","featurefile.feature");
             FileSystem.AddFile(featureFilePath, new MockFileData(featureText));
-            //var fileInfo = FileSystem.FileInfo()
             var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration), FileSystem);
             var feature = parser.Parse(featureFilePath);
-            Check.That(feature.Uri).Equals(featureFilePath);
+            Check.That(feature.Uri).Equals(FileSystem.Path.GetFullPath(featureFilePath).ToFileUri());
+            Check.That(feature.Root).Equals(FileSystem.Directory.GetCurrentDirectory().ToFolderUri());
         }
 
     }
