@@ -79,8 +79,14 @@ namespace PicklesDoc.Pickles.Extensions
         public static Uri ToFolderUri(this string instance)
         {
             instance = AddFileSchema(instance);
+
+            //Win-specific folder path
+            if (instance.EndsWith("\\"))
+                return new Uri(instance);
+
             if (!instance.EndsWith(_directorySeparator))
                 instance = instance + _directorySeparator;
+
             return new Uri(instance);
         }
 
