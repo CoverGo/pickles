@@ -324,9 +324,12 @@ namespace PicklesDoc.Pickles.CommandLine.UnitTests
         [Test]
         public void ThenCanParseMultipleResultsFilesWithWildCardsAndSemicolonWhenSomeHaveNoMatch()
         {
-            FileSystem.AddFile(@"c:\results_foo1.xml", "<xml />");
-            FileSystem.AddFile(@"c:\results_foo2.xml", "<xml />");
-            var args = new[] { @"-link-results-file=c:\results_foo*.xml;c:\results_bar*.xml" };
+            FileSystem.AddFile(@"results_foo1.xml", "<xml />");
+            var foo1Path = FileSystem.Path.GetFullPath("results_foo1.xml");
+            FileSystem.AddFile(@"results_foo2.xml", "<xml />");
+            var foo2Path = FileSystem.Path.GetFullPath("results_foo2.xml");
+
+            var args = new[] { @"-link-results-file=results_foo*.xml;results_bar*.xml" };
 
             var configuration = new Configuration();
             var commandLineArgumentParser = new CommandLineArgumentParser(FileSystem);
@@ -336,15 +339,15 @@ namespace PicklesDoc.Pickles.CommandLine.UnitTests
             Check.That(configuration.HasTestResults).IsTrue();
             Check.That(configuration.TestResultsFiles
                 .Select(trf => trf.FullName))
-                .ContainsExactly(@"c:\results_foo1.xml", @"c:\results_foo2.xml");
+                .ContainsExactly(foo1Path, foo2Path);
         }
 
         [Test]
         public void ThenNoExceptionIsThrownWhenResultsFileIsDir()
         {
-            FileSystem.AddFile(@"c:\temp\results_foo1.xml", "<xml />");
-            FileSystem.AddFile(@"c:\temp\results_foo2.xml", "<xml />");
-            var args = new[] { @"-link-results-file=c:\temp\" };
+            FileSystem.AddFile(@"temp\results_foo1.xml", "<xml />");
+            FileSystem.AddFile(@"temp\results_foo2.xml", "<xml />");
+            var args = new[] { @"-link-results-file=temp\" };
 
             var configuration = new Configuration();
             var commandLineArgumentParser = new CommandLineArgumentParser(FileSystem);
@@ -357,8 +360,10 @@ namespace PicklesDoc.Pickles.CommandLine.UnitTests
         [Test]
         public void ThenCanParseResultsFilesWithMultipleMatchesResolvingInSingleMatch()
         {
-            FileSystem.AddFile(@"c:\results_foo.xml", "<xml />");
-            var args = new[] { @"-link-results-file=c:\results*.xml;c:\*foo.xml" };
+            FileSystem.AddFile(@"results_foo.xml", "<xml />");
+            var fileInfo=FileSystem.FileInfo.FromFileName("results_foo.xml");
+
+            var args = new[] { $"-link-results-file={FileSystem.Path.Combine(fileInfo.Directory.FullName,"results*.xml")};*foo.xml" };
 
             var configuration = new Configuration();
             var commandLineArgumentParser = new CommandLineArgumentParser(FileSystem);
@@ -368,14 +373,16 @@ namespace PicklesDoc.Pickles.CommandLine.UnitTests
             Check.That(configuration.HasTestResults).IsTrue();
             Check.That(configuration.TestResultsFiles
                 .Select(trf => trf.FullName))
-                .ContainsExactly(@"c:\results_foo.xml");
+                .ContainsExactly(fileInfo.FullName);
         }
 
         [Test]
         public void ThenCanParseResultsFileWithShortFormSuccessfully()
         {
-            FileSystem.AddFile(@"c:\results.xml", "<xml />");
-            var args = new[] { @"-lr=c:\results.xml" };
+            FileSystem.AddFile(@"results.xml", "<xml />");
+            var resultsPath = FileSystem.Path.GetFullPath("results.xml");
+
+            var args = new[] { @"-lr=results.xml" };
 
             var configuration = new Configuration();
             var commandLineArgumentParser = new CommandLineArgumentParser(FileSystem);
@@ -383,21 +390,21 @@ namespace PicklesDoc.Pickles.CommandLine.UnitTests
 
             Check.That(shouldContinue).IsTrue();
             Check.That(configuration.HasTestResults).IsTrue();
-            Check.That(configuration.TestResultsFile.FullName).IsEqualTo(@"c:\results.xml");
+            Check.That(configuration.TestResultsFile.FullName).IsEqualTo(resultsPath);
         }
 
         [Test]
         public void ThenCanParseShortFormArgumentsSuccessfully()
         {
-            var args = new[] { @"-f=c:\features", @"-o=c:\features-output" };
+            var args = new[] { @"-f=features", @"-o=features-output" };
 
             var configuration = new Configuration();
             var commandLineArgumentParser = new CommandLineArgumentParser(FileSystem);
             bool shouldContinue = commandLineArgumentParser.Parse(args, configuration, TextWriter.Null);
 
             Check.That(shouldContinue).IsTrue();
-            Check.That(configuration.FeatureFolder.FullName).IsEqualTo(@"c:\features");
-            Check.That(configuration.OutputFolder.FullName).IsEqualTo(@"c:\features-output");
+            Check.That(configuration.FeatureFolder.FullName).IsEqualTo(FileSystem.Path.GetFullPath("features"));
+            Check.That(configuration.OutputFolder.FullName).IsEqualTo(FileSystem.Path.GetFullPath("features-output"));
         }
 
         [Test]
