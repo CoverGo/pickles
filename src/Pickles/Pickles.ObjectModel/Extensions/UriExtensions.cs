@@ -43,7 +43,7 @@ namespace PicklesDoc.Pickles.Extensions
 
         public static Uri GetFileUri(this IDirectoryInfo instance, string file)
         {
-            return Path.Combine(instance.FullName, file).ToFileUri();
+            return instance.FileSystem.Path.Combine(instance.FullName, file).ToFileUri();
         }
 
         public static Uri ToUri(this IFileSystemInfo instance)

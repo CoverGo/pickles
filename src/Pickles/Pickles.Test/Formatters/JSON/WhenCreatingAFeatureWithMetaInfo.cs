@@ -42,7 +42,7 @@ namespace PicklesDoc.Pickles.Test.Formatters.JSON
 
         public WhenCreatingAFeatureWithMetaInfo()
         {
-            RootPath = Path.Combine(FileSystemPrefix,"AcceptanceTest");
+            RootPath =FileSystem.Path.Combine(FileSystemPrefix,"AcceptanceTest");
         }
         public void Setup()
         {

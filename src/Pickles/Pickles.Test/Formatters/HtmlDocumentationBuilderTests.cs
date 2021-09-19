@@ -34,7 +34,7 @@ namespace PicklesDoc.Pickles.Test.Formatters
 
         public HtmlDocumentationBuilderTests()
         {
-             RootPath = Path.Combine(FileSystemPrefix, "EmptyFolderTests");
+             RootPath =FileSystem.Path.Combine(FileSystemPrefix, "EmptyFolderTests");
         }
         [Test]
         public void ShouldNotBlowUpWHenParsingEmptyFolder()

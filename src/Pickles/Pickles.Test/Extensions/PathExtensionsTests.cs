@@ -34,22 +34,22 @@ namespace PicklesDoc.Pickles.Test.Extensions
         public void Get_A_Relative_Path_When_Location_Is_Deeper_Than_Root()
         {
             MockFileSystem fileSystem = FileSystem;
-            fileSystem.AddFile(Path.Combine("test","deep","blah.feature"),"Feature:"); // adding a file automatically adds all parent directories
+            fileSystem.AddFile(FileSystem.Path.Combine("test","deep","blah.feature"),"Feature:"); // adding a file automatically adds all parent directories
 
-            string actual = PathExtensions.MakeRelativePath("test", Path.Combine("test","deep","blah.feature"), fileSystem);
+            string actual = PathExtensions.MakeRelativePath("test",FileSystem.Path.Combine("test","deep","blah.feature"), fileSystem);
 
-            Check.That(actual).IsEqualTo(Path.Combine("deep","blah.feature"));
+            Check.That(actual).IsEqualTo(FileSystem.Path.Combine("deep","blah.feature"));
         }
 
         [Test]
         public void Get_A_Relative_Path_When_Location_Is_Deeper_Than_Root_Even_When_Root_Contains_End_Slash()
         {
             MockFileSystem fileSystem = FileSystem;
-            fileSystem.AddFile(Path.Combine("test","deep","blah.feature"), "Feature:"); // adding a file automatically adds all parent directories
+            fileSystem.AddFile(FileSystem.Path.Combine("test","deep","blah.feature"), "Feature:"); // adding a file automatically adds all parent directories
 
-            string actual = PathExtensions.MakeRelativePath("test", Path.Combine("test","deep","blah.feature"), fileSystem);
+            string actual = PathExtensions.MakeRelativePath("test",FileSystem.Path.Combine("test","deep","blah.feature"), fileSystem);
 
-            Check.That(actual).IsEqualTo(Path.Combine("deep","blah.feature"));
+            Check.That(actual).IsEqualTo(FileSystem.Path.Combine("deep","blah.feature"));
         }
     }
 }

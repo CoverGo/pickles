@@ -42,7 +42,7 @@ namespace PicklesDoc.Pickles.Test.Formatters
 
         public TableOfContentsShouldBeCreatedFromAFolderStructure()
         {
-            RootPath = Path.Combine(FileSystemPrefix,"FeatureCrawlerTests");
+            RootPath =FileSystem.Path.Combine(FileSystemPrefix,"FeatureCrawlerTests");
         }
         public void Setup()
         {

@@ -45,7 +45,7 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Word.UnitTests
 
         public WhenBuildingWordDocuments()
         {
-            this.RootPath = Path.Combine(FileSystemPrefix,"OrderingTests");
+            this.RootPath =FileSystem.Path.Combine(FileSystemPrefix,"OrderingTests");
         }
 
         [SetUp]
@@ -80,7 +80,7 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Word.UnitTests
 
             this.builder.Build(this.features);
 
-            var outputPath = Path.Combine(Configuration.OutputFolder.FullName, "features.docx");
+            var outputPath =FileSystem.Path.Combine(Configuration.OutputFolder.FullName, "features.docx");
 
             using (var stream = this.FileSystem.File.OpenRead(outputPath))
             {

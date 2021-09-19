@@ -39,7 +39,7 @@ namespace PicklesDoc.Pickles.Test.DataStructures
 
         public TreeTests()
         {
-            RootPath = Path.Combine(FileSystemPrefix,"OrderingTests");
+            RootPath =FileSystem.Path.Combine(FileSystemPrefix,"OrderingTests");
         }
         [Test]
         public void ShouldIterateInRightOrder()

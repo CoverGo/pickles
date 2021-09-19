@@ -33,7 +33,7 @@ namespace PicklesDoc.Pickles.Test
         [Test]
         public void Parse_InvalidFeatureFile_ThrowsFeatureParseExceptionWithFilename()
         {
-            var filePath = Path.Combine("temp","featurefile.feature");
+            var filePath =FileSystem.Path.Combine("temp","featurefile.feature");
             FileSystem.AddFile(filePath, new MockFileData("Invalid feature file"));
             var fileInfo=FileSystem.FileInfo.FromFileName(filePath);
             var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration), FileSystem);
@@ -52,7 +52,7 @@ namespace PicklesDoc.Pickles.Test
                   When I parse the feature and pass uri
                   Then parsed feature has this uri set in Uri property
             ";
-            var featureFilePath = Path.Combine("temp","featurefile.feature");
+            var featureFilePath =FileSystem.Path.Combine("temp","featurefile.feature");
             FileSystem.AddFile(featureFilePath, new MockFileData(featureText));
             var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration), FileSystem);
             var feature = parser.Parse(featureFilePath);

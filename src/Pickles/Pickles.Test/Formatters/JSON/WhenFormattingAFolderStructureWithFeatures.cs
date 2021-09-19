@@ -36,7 +36,7 @@ namespace PicklesDoc.Pickles.Test.Formatters.JSON
 
         public WhenFormattingAFolderStructureWithFeatures()
         {
-            OutputDirectory = Path.Combine(FileSystemPrefix, "JSONFeatureOutput");
+            OutputDirectory =FileSystem.Path.Combine(FileSystemPrefix, "JSONFeatureOutput");
         }
         public void Setup()
         {

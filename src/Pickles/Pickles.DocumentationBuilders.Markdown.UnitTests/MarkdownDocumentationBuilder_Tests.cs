@@ -60,11 +60,12 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
         public void When_I_Build_Documentation_A_File_Is_Created()
         {
             var outputFolder = "output";
-            var defaultOutputFile = Path.Combine("output","features.md");
 
             var container = BuildContainer();
             var configuration = container.Resolve<IConfiguration>();
             var fileSystem = (MockFileSystem)container.Resolve<IFileSystem>();
+            var defaultOutputFile = fileSystem.Path.Combine("output","features.md");
+
             configuration.OutputFolder = fileSystem.DirectoryInfo.FromDirectoryName(outputFolder);
             var markdownDocumentationBuilder = container.Resolve<MarkdownDocumentationBuilder>();
 
@@ -86,16 +87,15 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
 
             markdownDocumentationBuilder.Build(null);
 
-            Assert.IsTrue(fileSystem.FileExists(Path.Combine("output","pass.png")));
-            Assert.IsTrue(fileSystem.FileExists(Path.Combine("output","fail.png")));
-            Assert.IsTrue(fileSystem.FileExists(Path.Combine("output","inconclusive.png")));
+            Assert.IsTrue(fileSystem.FileExists(fileSystem.Path.Combine("output","pass.png")));
+            Assert.IsTrue(fileSystem.FileExists(fileSystem.Path.Combine("output","fail.png")));
+            Assert.IsTrue(fileSystem.FileExists(fileSystem.Path.Combine("output","inconclusive.png")));
         }
 
         [Test]
         public void With_A_Null_Tree_The_Output_Has_Default_Content()
         {
             var outputFolder = "output";
-            var defaultOutputFile = Path.Combine("output","features.md");
             var expectedFile = new string[]
             {
                 "# Features",
@@ -106,6 +106,8 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
             var container = BuildContainer();
             var configuration = container.Resolve<IConfiguration>();
             var fileSystem = (MockFileSystem)container.Resolve<IFileSystem>();
+            var defaultOutputFile = fileSystem.Path.Combine("output","features.md");
+
             configuration.OutputFolder = fileSystem.DirectoryInfo.FromDirectoryName(outputFolder);
             var markdownDocumentationBuilder = container.Resolve<MarkdownDocumentationBuilder>();
 
@@ -123,7 +125,6 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
         public void With_A_Simple_Feature_The_Output_Has_Default_Content()
         {
             var outputFolder = "output";
-            var defaultOutputFile = Path.Combine("output", "features.md");
             var expectedFile = new string[]
             {
                 "# Features",
@@ -137,6 +138,8 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.UnitTests
             var container = BuildContainer();
             var configuration = container.Resolve<IConfiguration>();
             var fileSystem = (MockFileSystem)container.Resolve<IFileSystem>();
+            var defaultOutputFile = fileSystem.Path.Combine("output", "features.md");
+
             configuration.OutputFolder = fileSystem.DirectoryInfo.FromDirectoryName(outputFolder);
             var markdownDocumentationBuilder = container.Resolve<MarkdownDocumentationBuilder>();
 

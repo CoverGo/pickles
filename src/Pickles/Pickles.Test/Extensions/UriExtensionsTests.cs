@@ -36,15 +36,15 @@ namespace PicklesDoc.Pickles.Test.Extensions
 
             Uri uri = info.ToFileUriCombined("test.txt", FileSystem);
 
-            Check.That(uri).IsEqualTo(new Uri("file://"+Path.Combine(info.FullName,"test.txt")));
+            Check.That(uri).IsEqualTo(new Uri("file://" + FileSystem.Path.Combine(info.FullName,"test.txt")));
         }
 
         [Test]
         public void ToFileUriString_WithoutTrailingSlash_ValidOutputWithTrailingSlash()
         {
-            Uri uri = Path.Combine("temp","test.txt").ToFileUri();
+            Uri uri =FileSystem.Path.Combine("temp","test.txt").ToFileUri();
 
-            Check.That(uri).IsEqualTo(new Uri("file://"+Path.Combine("temp","test.txt")));
+            Check.That(uri).IsEqualTo(new Uri("file://" + FileSystem.Path.Combine("temp","test.txt")));
         }
 
         [Test]
@@ -86,7 +86,7 @@ namespace PicklesDoc.Pickles.Test.Extensions
         [Test]
         public void ToUriFileInfo_NormalFilename_ProducesUri()
         {
-            var fileInfo = FileSystem.FileInfo.FromFileName(Path.Combine("temp","test.txt"));
+            var fileInfo = FileSystem.FileInfo.FromFileName(FileSystem.Path.Combine("temp","test.txt"));
 
             Uri uri = fileInfo.ToUri();
 
@@ -106,7 +106,7 @@ namespace PicklesDoc.Pickles.Test.Extensions
         [Test]
         public void ToUriFileSystemInfo_FileInfo_ProducesUri()
         {
-            var fsi = FileSystem.FileInfo.FromFileName(Path.Combine("temp","test.txt"));
+            var fsi = FileSystem.FileInfo.FromFileName(FileSystem.Path.Combine("temp","test.txt"));
 
             Uri uri = fsi.ToUri();
 

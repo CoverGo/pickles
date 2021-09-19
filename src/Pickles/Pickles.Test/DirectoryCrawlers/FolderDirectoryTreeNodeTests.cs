@@ -68,7 +68,7 @@ namespace PicklesDoc.Pickles.Test.DirectoryCrawlers
             var directoryInfo = FileSystem.DirectoryInfo.FromDirectoryName("temp");
 
             var node = new FolderNode(directoryInfo, "../");
-            var uri = Path.Combine(directoryInfo.FullName,"child").ToFolderUri();
+            var uri =FileSystem.Path.Combine(directoryInfo.FullName,"child").ToFolderUri();
             string relative = node.GetRelativeUriTo(uri);
 
             Check.That(relative).Contains("../");
@@ -94,7 +94,7 @@ namespace PicklesDoc.Pickles.Test.DirectoryCrawlers
 
             var node = new FolderNode(directoryInfo, "../");
 
-            var uri = Path.Combine(FileSystem.DirectoryInfo.FromDirectoryName("temp2").FullName,"test2.html").ToFileUri();
+            var uri =FileSystem.Path.Combine(FileSystem.DirectoryInfo.FromDirectoryName("temp2").FullName,"test2.html").ToFileUri();
             string relative = node.GetRelativeUriTo(uri);
 
             Check.That(relative).IsEqualTo("../temp/");
@@ -103,7 +103,7 @@ namespace PicklesDoc.Pickles.Test.DirectoryCrawlers
         [Test]
         public void GetRelativeUriTo_DirectoryToParentDirectory_ReturnsRelativePath()
         {
-            var directoryInfo = FileSystem.DirectoryInfo.FromDirectoryName(Path.Combine("temp","child"));
+            var directoryInfo = FileSystem.DirectoryInfo.FromDirectoryName(FileSystem.Path.Combine("temp","child"));
 
             var node = new FolderNode(directoryInfo, "../");
 
@@ -116,7 +116,7 @@ namespace PicklesDoc.Pickles.Test.DirectoryCrawlers
         [Test]
         public void GetRelativeUriTo_FileToDirectory_ReturnsNodesFileName()
         {
-            var fileInfo = FileSystem.FileInfo.FromFileName(Path.Combine("temp","test1.html"));
+            var fileInfo = FileSystem.FileInfo.FromFileName(FileSystem.Path.Combine("temp","test1.html"));
 
             var node = new FolderNode(fileInfo, "../");
 
@@ -129,11 +129,11 @@ namespace PicklesDoc.Pickles.Test.DirectoryCrawlers
         [Test]
         public void GetRelativeUriTo_FileToFile_ReturnsNodesFileName()
         {
-            var fileInfo = FileSystem.FileInfo.FromFileName(Path.Combine("temp","test1.html"));
+            var fileInfo = FileSystem.FileInfo.FromFileName(FileSystem.Path.Combine("temp","test1.html"));
 
             var node = new FolderNode(fileInfo, "../");
 
-            var uri = FileSystem.FileInfo.FromFileName(Path.Combine("temp","test2.html")).FullName.ToFileUri();
+            var uri = FileSystem.FileInfo.FromFileName(FileSystem.Path.Combine("temp","test2.html")).FullName.ToFileUri();
             string relative = node.GetRelativeUriTo(uri);
 
             Check.That(relative).IsEqualTo("test1.html");
@@ -143,13 +143,13 @@ namespace PicklesDoc.Pickles.Test.DirectoryCrawlers
         public void RealData()
         {
             var originalLocation =
-                FileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(
+                FileSystem.DirectoryInfo.FromDirectoryName(FileSystem.Path.Combine(
                     "tfs","Dev.CAX","src","CAX_Main","src","net","Projects","Aim.Gain.GoldenCopy.FunctionalTesting","CAX","DistributionOfRights"));
 
             var node = new FolderNode(originalLocation, "");
 
             var uri =
-                FileSystem.DirectoryInfo.FromDirectoryName(Path.Combine("tfs", "Dev.CAX", "src", "CAX_Main", "src", "net", "Projects",
+                FileSystem.DirectoryInfo.FromDirectoryName(FileSystem.Path.Combine("tfs", "Dev.CAX", "src", "CAX_Main", "src", "net", "Projects",
                     "Aim.Gain.GoldenCopy.FunctionalTesting", "CAX")).FullName.ToFolderUri();
 
             string relative = node.GetRelativeUriTo(uri);

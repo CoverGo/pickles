@@ -131,7 +131,7 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.AcceptanceTests.Step
 
         public void Then_The_File_Exists(string expectedFile, string expectedFolder)
         {
-            this.filePath = Path.Combine(expectedFolder,expectedFile);
+            this.filePath = FileSystem.Path.Combine(expectedFolder,expectedFile);
             Assert.IsTrue(this.FileSystem.File.Exists(this.filePath),string.Format("File \"{0}\" not found",filePath));
         }
 
@@ -143,11 +143,11 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown.AcceptanceTests.Step
             string defaultOutputFile = string.Empty;
             if (configuration.OutputFolder == null)
             {
-                defaultOutputFile = Path.Combine(@"C:\testing", fileName);
+                defaultOutputFile =FileSystem.Path.Combine(@"C:\testing", fileName);
             }
             else
             {
-                defaultOutputFile = Path.Combine(configuration.OutputFolder.FullName, fileName);
+                defaultOutputFile =FileSystem.Path.Combine(configuration.OutputFolder.FullName, fileName);
             }
 
             return defaultOutputFile;

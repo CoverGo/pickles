@@ -57,7 +57,7 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown
         {
             var documentation = new Documentation(featureTree);
 
-            this.WriteContentToFile(Path.Combine(this.outputFolder, "features.md"), documentation.CurrentPage);
+            this.WriteContentToFile(fileSystem.Path.Combine(this.outputFolder, "features.md"), documentation.CurrentPage);
 
             WriteImage(outputFolder, "pass_32.png", "pass.png");
             WriteImage(outputFolder, "fail_32.png", "fail.png");

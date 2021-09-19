@@ -47,7 +47,7 @@ namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
         {
             var directoryInfo = FileSystem.DirectoryInfo.FromDirectoryName(featureFolder);
             directoryInfo.Create();
-            var fileName = Path.Combine(featureFolder,featureFile);
+            var fileName = FileSystem.Path.Combine(featureFolder,featureFile);
             using var writer = FileSystem.FileInfo.FromFileName(fileName).CreateText();
             {
                 writer.Write(multilineText);
