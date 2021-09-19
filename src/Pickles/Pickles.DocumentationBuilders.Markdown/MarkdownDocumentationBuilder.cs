@@ -46,8 +46,10 @@ namespace PicklesDoc.Pickles.DocumentationBuilders.Markdown
             if (configuration.OutputFolder == null)
             {
                 configuration.OutputFolder = fileSystem.DirectoryInfo.FromDirectoryName("testing");
-                configuration.OutputFolder.Create();
             }
+            if(!configuration.OutputFolder.Exists)
+                configuration.OutputFolder.Create();
+
             outputFolder = configuration.OutputFolder.FullName;
         }
 
