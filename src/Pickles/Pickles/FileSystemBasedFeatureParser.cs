@@ -54,11 +54,6 @@ namespace PicklesDoc.Pickles
                 try
                 {
                     feature = this.parser.Parse(specificEncoderReader);
-                    if (feature != null)
-                    {
-                        feature.Uri = fileInfo.FullName?.ToFileUri();
-                        feature.Root = this.fileSystem.Directory.GetCurrentDirectory().ToFolderUri();
-                    }
                 }
                 catch (FeatureParseException e)
                 {

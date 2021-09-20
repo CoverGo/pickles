@@ -18,6 +18,7 @@
 //  </copyright>
 //  --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.IO.Abstractions;
 using System.Reflection;
@@ -98,6 +99,8 @@ namespace PicklesDoc.Pickles
         }
 
         public bool ShouldIncludeExperimentalFeatures { get; private set; }
+
+        public Uri FeatureBaseUri { get; set; }
 
         public void AddTestResultFile(IFileInfo IFileInfo)
         {

@@ -63,31 +63,37 @@ namespace PicklesDoc.Pickles.Extensions
             return ToFileUri(instance.FullName);
         }
 
-        public static Uri ToFileUri(this string instance)
+        public static Uri ToFileUri(this string filePath)
         {
-            instance = AddFileSchema(instance);
-            return new Uri(instance);
+            filePath = AddFileSchema(filePath);
+            return new Uri(filePath);
         }
 
-        private static string AddFileSchema(string instance)
+        private static string AddFileSchema(string filePath)
         {
-            if (!instance.StartsWith(_fileSchema))
-                instance = _fileSchema + instance;
-            return instance;
+            if (!filePath.StartsWith(_fileSchema))
+                filePath = _fileSchema + filePath;
+            return filePath;
         }
 
-        public static Uri ToFolderUri(this string instance)
+        public static Uri ToFolderUri(this string folderPath)
         {
-            instance = AddFileSchema(instance);
+            folderPath = AddFileSchema(folderPath);
 
             //Win-specific folder path
-            if (instance.EndsWith("\\"))
-                return new Uri(instance);
+            if (folderPath.EndsWith("\\"))
+                return new Uri(folderPath);
 
-            if (!instance.EndsWith(_directorySeparator))
-                instance = instance + _directorySeparator;
+            if (!folderPath.EndsWith(_directorySeparator))
+                folderPath = folderPath + _directorySeparator;
 
-            return new Uri(instance);
+            return new Uri(folderPath);
+        }
+
+        public static Uri ToFolderUri(this Uri uri)
+        {
+            var uriString = uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.ToString();
+            return uriString.EndsWith("/") ? uri : new Uri(uriString + "/",UriKind.RelativeOrAbsolute);
         }
 
         public static string GetUriForTargetRelativeToMe(this Uri me, IFileSystemInfo target, string newExtension)

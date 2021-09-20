@@ -18,6 +18,7 @@
 //  </copyright>
 //  --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.IO.Abstractions;
 
@@ -49,6 +50,7 @@ namespace PicklesDoc.Pickles
 
         string ExcludeTags { get; set; }
         string HideTags { get; set; }
+        Uri FeatureBaseUri { get; set; }
 
         void AddTestResultFile(IFileInfo IFileInfo);
 

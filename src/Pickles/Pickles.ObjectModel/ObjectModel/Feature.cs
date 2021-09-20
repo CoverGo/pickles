@@ -35,10 +35,6 @@ namespace PicklesDoc.Pickles.ObjectModel
 
         public string Name { get; set; }
 
-        public Uri Uri { get; set; }
-        
-        public Uri Root { get; set; }
-
         public string Description { get; set; }
 
         public List<IFeatureElement> FeatureElements { get; }

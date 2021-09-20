@@ -33,6 +33,8 @@ using System.IO.Abstractions;
 using PicklesDoc.Pickles.DirectoryCrawler;
 using Autofac;
 using NFluent;
+using PicklesDoc.Pickles.DocumentationBuilders.Html;
+using PicklesDoc.Pickles.Extensions;
 
 namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
 {
@@ -48,17 +50,25 @@ namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
             var directoryInfo = FileSystem.DirectoryInfo.FromDirectoryName(featureFolder);
             directoryInfo.Create();
             var fileName = FileSystem.Path.Combine(featureFolder,featureFile);
-            using var writer = FileSystem.FileInfo.FromFileName(fileName).CreateText();
+            var fileInfo = FileSystem.FileInfo.FromFileName(fileName);
+            using var writer = fileInfo.CreateText();
             {
                 writer.Write(multilineText);
                 writer.Close();
             }
 
-            var parser = new FileSystemBasedFeatureParser(new FeatureParser(Configuration),FileSystem);
+            var relevantFileDetector = new RelevantFileDetector();
+            var featureNodeFactory = new FeatureNodeFactory(relevantFileDetector,
+                new FileSystemBasedFeatureParser(new FeatureParser(Configuration), FileSystem),
+                new HtmlMarkdownFormatter(new MarkdownProvider()),
+                FileSystem);
 
-            var feature = parser.Parse(fileName);
-
-            this.nodes = new Tree(new FeatureNode(this.FileSystem.DirectoryInfo.FromDirectoryName(@"output"), string.Empty, feature));
+            var crawler = new DirectoryTreeCrawler(relevantFileDetector,
+                                                   featureNodeFactory,
+                                                   FileSystem);
+            this.nodes =
+                crawler.Crawl(FileSystem.DirectoryInfo.FromDirectoryName(FileSystem.Directory.GetCurrentDirectory()),
+                    new ParsingReport());
         }
         [Given("I have this feature description")]
         public void IHaveThisFeatureDescription(string featureDescription)
@@ -86,6 +96,12 @@ namespace Pickles.DocumentationBuilders.Cucumber.UnitTests.AutomationLayer
             var actualResult = this.FileSystem.File.ReadAllText(@"output/cucumberResult.json");
 
             Check.That(actualResult).Contains(expectedResult);
+        }
+
+        [Given(@"feature base uri is provided from configuration as '(.*)'")]
+        public void GivenFeatureBaseUriIsProvidedFromConfigurationAs(string uriString)
+        {
+            Configuration.FeatureBaseUri = new Uri(uriString, UriKind.RelativeOrAbsolute);
         }
     }
 }
