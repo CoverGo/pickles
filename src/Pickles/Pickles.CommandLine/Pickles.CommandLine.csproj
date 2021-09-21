@@ -45,7 +45,7 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <RepositoryUrl>https://github.com/picklesdoc/pickles</RepositoryUrl>
+    <RepositoryUrl>https://github.com/CoverGo/pickles</RepositoryUrl>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>pickles</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
