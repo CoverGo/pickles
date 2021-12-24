@@ -48,6 +48,7 @@
     <RepositoryUrl>https://github.com/picklesdoc/pickles</RepositoryUrl>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>pickles</ToolCommandName>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
