@@ -44,10 +44,11 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <PackageId>PACKAGE_ID</PackageId>
-    <RepositoryUrl>https://github.com/picklesdoc/pickles</RepositoryUrl>
+    <PackageId>Pickles.CommandLine</PackageId>
+    <RepositoryUrl>https://github.com/covergo/pickles</RepositoryUrl>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>pickles</ToolCommandName>
+    <PackageVersion>3.0.3</PackageVersion>
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
