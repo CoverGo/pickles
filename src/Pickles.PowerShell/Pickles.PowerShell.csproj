@@ -58,6 +58,6 @@
     <ProjectReference Include="..\Pickles\Pickles.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Management.Automation" Version="6.0.4" />
+    <PackageReference Include="System.Management.Automation" Version="6.1.6" />
   </ItemGroup>
 </Project>
